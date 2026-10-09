@@ -1,0 +1,85 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+title School Facility Rental - Activity
+
+|Renter|
+start
+:Choose facility and date;
+
+|Website|
+:Check availability;
+
+if (available?) then ([yes])
+  |Renter|
+  :Enter contact information;
+  :Submit request;
+
+  |Website|
+  :Send request for review;
+
+  |School Staff|
+  :Review request;
+
+  if (Request approved?) then ([approved])
+    |Website|
+    :Request payment;
+
+    |Payment Service|
+    :Process payment;
+
+    if (Payment succeeds?) then ([payment succeeds])
+
+        |Website|
+        :Save booking;
+
+        |Email Service|
+        :Send confirmation email;
+
+        |Renter|
+        :Receive confirmation;
+
+        stop
+
+    else ([payment fails])
+
+        |Website|
+        :Record payment failure;
+
+        |Email Service|
+        :Send payment failure email;
+
+        |Renter|
+        :Receive payment failure notice;
+
+        stop
+
+    endif
+
+  else ([rejected])
+
+    |Website|
+    :Record rejection;
+
+    |Email Service|
+    :Send rejection email;
+
+    |Renter|
+    :Receive rejection notice;
+
+    stop
+
+  endif
+
+else ([not available])
+
+    |Website|
+    :Show not available;
+
+    |Renter|
+    :Choose another date \nor stop;
+
+    stop
+
+endif
+
+@enduml

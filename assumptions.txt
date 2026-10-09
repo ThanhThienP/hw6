@@ -1,0 +1,4 @@
++ The system verifies availability after the renter chooses a date/time/location
++ Payment is processed after the school staff approves the request
++ The system logs the outcome of rejected requests or failed payments, but a physical facility booking is only saved upon a successful payment
++ The renter always gets an email telling them the final result (denied/approved/failed)
